@@ -19,9 +19,13 @@ public:
 	Menu() {};
 	void drawFrame();
 
+	void drawFrame(int cX, int xY);
+
 	void drawFrame(std::string header);
 
 	void drawOptions();
+
+	void drawOptions(int cX, int cY);
 
 	void drawQuestion(Question q);
 

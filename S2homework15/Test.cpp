@@ -6,9 +6,9 @@ void timeInit(int seconds);
 
 void Test::init()
 {
-	std::vector<std::string> options;
-	options.push_back("Start test");
-	options.push_back("Exit");
+	std::vector<std::string> options ({ "Start test" , "Exit" });
+	//options.push_back("Start test");
+	//options.push_back("Exit");
 	Menu menu(options);
 	menu.drawOptions();
 	int key;
@@ -136,6 +136,7 @@ double Test::getScore(std::vector<Answer> results)
 	int correctAnswerCount = 0;
 	double score = 0;
 
+	
 	for (int i = 0; i < results.size(); i++)
 	{
 		if (results[i].correct)
@@ -144,7 +145,7 @@ double Test::getScore(std::vector<Answer> results)
 		}
 	}
 
-	score = (double)correctAnswerCount / results.size() * 100;
+	score = (double)correctAnswerCount / questions.size() * 100;
 	return score;
 }
 
@@ -152,18 +153,14 @@ void Test::addQuestion()
 {
 	Question newQuestion;
 	Menu m;
-	//std::vector <std::string> v("Yes", "No");
 	std::vector <std::string> v;
 	v.push_back("Yes");
 	v.push_back("No");
 	Menu yesNo(v);
 	m.drawMessageFrame("Enter question's text:");
-	//std::cout << "Enter question's text:\n";
-	//std::cin << m;
 	std::getline(std::cin, newQuestion.text);
 	int answerCount = 0;
 	Answer answer;
-	//char correct;
 	int key = 0;
 	bool enoughAnswers = false;
 	bool work = true;
@@ -172,9 +169,11 @@ void Test::addQuestion()
 	{
 		if (answerCount >= 2)
 		{
+			system("cls");
 			m.drawMessageFrame("Add another answer?");
-			yesNo.drawFrame();
-			yesNo.drawOptions();
+			yesNo.drawFrame(1, 1);
+			yesNo.drawOptions(3, 3);
+			work = true;
 			do
 			{
 				key = getKey();
@@ -182,15 +181,15 @@ void Test::addQuestion()
 				{
 				case UP_ARROW:
 					yesNo.up();
-					yesNo.drawOptions();
+					yesNo.drawOptions(3, 3);
 					break;
 				case DOWN_ARROW:
 					yesNo.down();
-					yesNo.drawOptions();
+					yesNo.drawOptions(3, 3);
 					break;
 				case ENTER:
 					num = yesNo.getSelectedOption();
-					if (num != 0)
+					if (num != 0) // 0 - 'Yes', 1 - 'No'
 					{
 						enoughAnswers = true;
 					}
@@ -202,70 +201,180 @@ void Test::addQuestion()
 				}
 
 			} while (work);
-
-			//std::cout << "Add another answer? Y/N\n";
-			/*std::cin >> correct;
-			std::cin.ignore(256, '\n');
-			if (correct == 'n' or correct == 'N')
-			{
-				enoughAnswers = true;
-				break;
-			}*/
 		}
-		m.drawMessageFrame("Enter answer: #" + answerCount + 1);
-		//std::cout << "Enter answer: # " << answerCount +1 << '\n';
-		std::getline(std::cin, answer.text);
-		m.drawMessageFrame("Is this answer correct?");
-		yesNo.drawFrame();
-		yesNo.drawOptions();
-		do
+		if (!enoughAnswers)
 		{
-			key = getKey();
-			switch (key)
-			{
-			case UP_ARROW:
-				yesNo.up();
-				yesNo.drawOptions();
-				break;
-			case DOWN_ARROW:
-				yesNo.down();
-				yesNo.drawOptions();
-				break;
-			case ENTER:
-				num = yesNo.getSelectedOption();
-				if (num == 0)
-				{
-					answer.correct = true;
-				}
-				else
-				{
-					answer.correct = false;
-				}
-				system("cls");
-				work = false;
-				break;
-			default:
-				break;
-			}
-
-		} while (work);
-		//std::cout << "Is this answer correct? Y/N\n";
-		//std::cin.ignore(256, '\n');
-		/*std::cin >> correct;
-		std::cin.ignore(256, '\n');
-		if (correct == 'y' or correct == 'Y')
-		{
-			answer.correct = true;
-		}
-		else
-		{
+			m.drawMessageFrame("Enter answer: #" + std::to_string(answerCount + 1));
+			std::getline(std::cin, answer.text);
 			answer.correct = false;
-		}*/
-		newQuestion.answers.push_back(answer);
-		answerCount++;
+			newQuestion.answers.push_back(answer);
+			answerCount++;
+		}
+
 	} while (!enoughAnswers);
+
+	std::vector<std::string> answersText;
+	for (int i = 0; i < newQuestion.answers.size(); i++)
+	{
+		answersText.push_back(newQuestion.answers[i].text);
+	}
+
+	m.drawMessageFrame("Pick correct answer");
+	Menu menuTest(answersText);
+
+	work = true;
+	do
+	{
+		menuTest.drawFrame(1, 1);
+		menuTest.drawOptions(3, 3);
+
+		key = getKey();
+		switch (key)
+		{
+		case UP_ARROW:
+			menuTest.up();
+			menuTest.drawOptions(3, 3);
+			break;
+		case DOWN_ARROW:
+			menuTest.down();
+			menuTest.drawOptions(3, 3);
+			break;
+		case ENTER:
+			num = menuTest.getSelectedOption();
+			newQuestion.answers[num].correct = true;
+			system("cls");
+			work = false;
+			break;
+		default:
+			break;
+		}
+
+	} while (work);
+
+
 	system("cls");
 }
+
+//void Test::addQuestion()
+//{
+//	Question newQuestion;
+//	Menu m;
+//	//std::vector <std::string> v("Yes", "No");
+//	std::vector <std::string> v;
+//	v.push_back("Yes");
+//	v.push_back("No");
+//	Menu yesNo(v);
+//	m.drawMessageFrame("Enter question's text:");
+//	//std::cout << "Enter question's text:\n";
+//	//std::cin << m;
+//	std::getline(std::cin, newQuestion.text);
+//	int answerCount = 0;
+//	Answer answer;
+//	//char correct;
+//	int key = 0;
+//	bool enoughAnswers = false;
+//	bool work = true;
+//	int num = 0;
+//	do
+//	{
+//		if (answerCount >= 2)
+//		{
+//			m.drawMessageFrame("Add another answer?");
+//			yesNo.drawFrame();
+//			yesNo.drawOptions();
+//			do
+//			{
+//				key = getKey();
+//				switch (key)
+//				{
+//				case UP_ARROW:
+//					yesNo.up();
+//					yesNo.drawOptions();
+//					break;
+//				case DOWN_ARROW:
+//					yesNo.down();
+//					yesNo.drawOptions();
+//					break;
+//				case ENTER:
+//					num = yesNo.getSelectedOption();
+//					if (num != 0)
+//					{
+//						enoughAnswers = true;
+//					}
+//					system("cls");
+//					work = false;
+//					break;
+//				default:
+//					break;
+//				}
+//
+//			} while (work);
+//
+//			//std::cout << "Add another answer? Y/N\n";
+//			/*std::cin >> correct;
+//			std::cin.ignore(256, '\n');
+//			if (correct == 'n' or correct == 'N')
+//			{
+//				enoughAnswers = true;
+//				break;
+//			}*/
+//		}
+//		//std::string n = "Enter answer: #" +  std::to_string(answerCount + 1);
+//		//m.drawMessageFrame("Enter answer: #" + answerCount + 1);
+//		m.drawMessageFrame("Enter answer: #" + std::to_string(answerCount + 1));
+//		//std::cout << "Enter answer: # " << answerCount +1 << '\n';
+//		std::getline(std::cin, answer.text);
+//		m.drawMessageFrame("Is this answer correct?");
+//		yesNo.drawFrame();
+//		yesNo.drawOptions();
+//		do
+//		{
+//			key = getKey();
+//			switch (key)
+//			{
+//			case UP_ARROW:
+//				yesNo.up();
+//				yesNo.drawOptions();
+//				break;
+//			case DOWN_ARROW:
+//				yesNo.down();
+//				yesNo.drawOptions();
+//				break;
+//			case ENTER:
+//				num = yesNo.getSelectedOption();
+//				if (num == 0)
+//				{
+//					answer.correct = true;
+//				}
+//				else
+//				{
+//					answer.correct = false;
+//				}
+//				system("cls");
+//				work = false;
+//				break;
+//			default:
+//				break;
+//			}
+//
+//		} while (work);
+//		//std::cout << "Is this answer correct? Y/N\n";
+//		//std::cin.ignore(256, '\n');
+//		/*std::cin >> correct;
+//		std::cin.ignore(256, '\n');
+//		if (correct == 'y' or correct == 'Y')
+//		{
+//			answer.correct = true;
+//		}
+//		else
+//		{
+//			answer.correct = false;
+//		}*/
+//		newQuestion.answers.push_back(answer);
+//		answerCount++;
+//	} while (!enoughAnswers);
+//	system("cls");
+//}
 
 Question& Test::getQuestion(int idx)
 {
@@ -307,7 +416,7 @@ void timeInit(int seconds)
 void Test::writeTestFile(std::string name)
 {
 	fs::path path = this->homePath;
-	fs::current_path(path);
+	//fs::current_path(path);
 	path /= name;
 	std::ofstream ofs;
 	ofs.open(name, std::ios::out);
@@ -315,22 +424,22 @@ void Test::writeTestFile(std::string name)
 
 	for (int i = 0; i < questions.size(); ++i)
 	{
-		ofs <<  questions[i].text;// << divider;
+		ofs << questions[i].text;// << divider;
 
 		for (int j = 0; j < questions[i].answers.size(); j++)
 		{
-			ofs << this->delimiter << questions[i].answers[j].text << this->delimiter << (std::boolalpha) << questions[i].answers[j].correct ;
+			ofs << this->delimiter << questions[i].answers[j].text << this->delimiter << (std::boolalpha) << questions[i].answers[j].correct;
 		}
 		ofs << this->delimiter << std::endl;
 	}
 	ofs.close();
-	
+
 }
 
 void Test::readTestFile(std::string name)
 {
 	fs::path path = this->homePath;
-	fs::current_path(path);
+	//fs::current_path(path);
 	path /= name;
 	//std::string divider = "-|-";
 	std::string text;
@@ -356,7 +465,7 @@ void Test::readTestFile(std::string name)
 				}
 				else
 				{
-					if (counter % 2!=0)
+					if (counter % 2 != 0)
 					{
 						a.text = data;
 					}

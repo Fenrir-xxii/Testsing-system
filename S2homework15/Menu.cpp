@@ -55,6 +55,25 @@ void Menu::drawFrame()
 	SetColor(WHITE, BLACK);
 }
 
+void Menu::drawFrame(int cX, int cY)
+{
+	size_t widht = getFrameWidth() + cX;
+	size_t height = getFrameHeight() + cY;
+	for (size_t y = cY; y < height; y++)
+	{
+		for (size_t x = cX; x < widht; x++)
+		{
+			if (x == cX || x == widht - 1 || y == cY || y == height - 1) {
+				SetCursorPosition(x, y);
+				SetColor(ConsoleColor::WHITE, ConsoleColor::GREEN_FADE);
+				std::cout << ' ';
+			}
+		}
+	}
+	SetColor(WHITE, BLACK);
+}
+
+
 void Menu::drawFrame(std::string header)
 {
 	size_t headerSize = header.size();
@@ -82,6 +101,26 @@ void Menu::drawFrame(std::string header)
 void Menu::drawOptions() {
 	int startX = 3;
 	int startY = 2;
+	int max = getMaxItemSize();
+	for (size_t i = 0; i < options.size(); i++)
+	{
+		SetCursorPosition(startX, startY + i);
+		if (activeOption == i) {
+			SetColor(RED, WHITE);
+		}
+		else {
+			SetColor(WHITE, BLACK);
+		}
+		auto item = options[i];
+		item.append(std::string(max - item.size(), ' '));
+		std::cout << item;
+	}
+	SetColor(WHITE, BLACK);
+}
+
+void Menu::drawOptions(int cX, int cY) {
+	int startX = cX;
+	int startY = cY;
 	int max = getMaxItemSize();
 	for (size_t i = 0; i < options.size(); i++)
 	{

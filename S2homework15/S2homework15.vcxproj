@@ -128,15 +128,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClassRoom.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="S2homework15.cpp" />
+    <ClCompile Include="Student.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="classRoom.h" />
     <ClInclude Include="console.h" />
+    <ClInclude Include="DataBase.h" />
+    <ClInclude Include="EnumMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="struct.h" />
+    <ClInclude Include="Student.h" />
     <ClInclude Include="Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

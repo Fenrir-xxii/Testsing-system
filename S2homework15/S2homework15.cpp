@@ -2,6 +2,9 @@
 #include <future>
 #include "Test.h"
 #include "Menu.h"
+#include "Student.h"
+#include "classRoom.h"
+#include "DataBase.h"
 
 void ShowConsoleCursor(bool showFlag)
 {
@@ -202,7 +205,7 @@ void ShowConsoleCursor(bool showFlag)
 //}
 
 
-int main()
+int main2()
 {
     ShowConsoleCursor(false);
     std::vector<Question> questions;
@@ -265,8 +268,34 @@ int main()
 
 
     //test.writeTestFile("test1.txt");
-    //test.readTestFile("test1.txt");
-    //test.init();
+    test.readTestFile("test1.txt");
+    test.init();
 
-    test.addQuestion();
+    //test.addQuestion();
+    return 0;
+}
+
+
+int main()
+{
+    ShowConsoleCursor(false);
+    ClassRoom classRoom;
+    //classRoom.init();
+
+    //Student student;
+    Credentials cred;
+    cred.login = "user1";
+    cred.password = "102030";
+    //Student student(cred);
+    
+    //classRoom.studentRegistration(cred.login);
+    classRoom.showMenu();
+    //classRoom.init();
+
+
+    //DataBase db;
+    ////db.init();
+    //Student stud = db.getStudent("user1");
+    //std::cout << stud.getLogin() << std::endl;
+    //db.init();
 }

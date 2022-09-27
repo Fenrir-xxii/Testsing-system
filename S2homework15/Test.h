@@ -38,7 +38,9 @@ private:
 	int timeDurSec;
 	fs::path homePath = fs::current_path().string() + "\\Tests";
 	std::string delimiter = "-|-";
+	//std::string testName;
 public:
+	Test() {}
 	Test(std::vector<Question> questions)
 	{
 		this->questions = questions;
