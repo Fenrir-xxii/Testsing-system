@@ -76,16 +76,16 @@ void Menu::drawFrame(int cX, int cY)
 
 void Menu::drawFrame(std::string header)
 {
-	size_t headerSize = header.size();
+	size_t headerSize = header.size()+2;
 	size_t width = getFrameWidth();
 	size_t maxWidth = (width > headerSize) ? width : headerSize;
 	size_t height = getFrameHeight();
 
 	for (size_t y = 0; y < height; y++)
 	{
-		for (size_t x = 0; x < width; x++)
+		for (size_t x = 0; x < maxWidth; x++)
 		{
-			if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
+			if (x == 0 || x == maxWidth-1 || y == 0 || y == height - 1) {
 				SetCursorPosition(x, y);
 				SetColor(ConsoleColor::WHITE, ConsoleColor::GREEN_FADE);
 				std::cout << ' ';
@@ -193,10 +193,12 @@ void Menu::drawQuestion(Question q)
 	options = temp;
 	std::string header = q.text;
 	drawFrame(header);
+	//int headerWidth = header.size();
 
 	int startX = 3;
 	int startY = 2;
 	int max = getMaxItemSize();
+	//max = max > headerWidth ? max : headerWidth;
 	for (size_t i = 0; i < options.size(); i++)
 	{
 		SetCursorPosition(startX, startY + i);

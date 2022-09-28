@@ -205,7 +205,7 @@ void ShowConsoleCursor(bool showFlag)
 //}
 
 
-int main2()
+int main()
 {
     ShowConsoleCursor(false);
     std::vector<Question> questions;
@@ -268,7 +268,8 @@ int main2()
 
 
     //test.writeTestFile("test1.txt");
-    test.readTestFile("test1.txt");
+    test.readTestFile("Basic C++ Test.txt");
+    test.setTime(150);
     test.init();
 
     //test.addQuestion();
@@ -276,7 +277,7 @@ int main2()
 }
 
 
-int main()
+int main2()
 {
     ShowConsoleCursor(false);
     ClassRoom classRoom;
@@ -298,4 +299,6 @@ int main()
     //Student stud = db.getStudent("user1");
     //std::cout << stud.getLogin() << std::endl;
     //db.init();
+
+    return 0;
 }

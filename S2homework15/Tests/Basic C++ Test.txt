@@ -1,0 +1,4 @@
+How many bytes are used to store Boolean?-|-1 Bit-|-false-|-1 Byte-|-true-|-2 Bytes-|-false-|-
+What range of values can store a signed Integer type?-|-0 to 4 294 967 295-|-false-|--32 768 to 32 767-|-false-|--2 147 483 648 to 2 147 483 647-|-true-|-
+What operator has highest priority (precedence)?-|-a-- (Postfix decrement)-|-true-|-= (Direct assignment)-|-false-|-++a (Prefix increment)-|-false-|-
+What is the return type of main function?-|-bool-|-false-|-int-|-true-|-float-|-false-|-

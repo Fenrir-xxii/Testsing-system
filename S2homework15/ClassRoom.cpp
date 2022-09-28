@@ -103,8 +103,14 @@ void ClassRoom::studentRegistrationMenu()
     }
     else
     {
-        std::cout << "Such login is already registered";
+        SetCursorPosition(1, 5);
+        SetColor(ConsoleColor::RED_FADE, ConsoleColor::BLACK);
+        std::cout << "Such login is already registered\n";
+        SetCursorPosition(1, 6);
+        SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
+        system("pause");
     }
+    system("cls");
 }
 
 void ClassRoom::studentLogIn()
@@ -123,6 +129,11 @@ void ClassRoom::studentLogIn()
          if (student.passValidation(password))
          {
              // show tests
+             std::vector<std::string> testNames;
+             for (int i = 0; i < this->tests.size(); i++)
+             {
+                 testNames.push_back(tests[i].getTestName());
+             }
          }
      }
      else

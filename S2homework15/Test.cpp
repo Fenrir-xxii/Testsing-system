@@ -44,9 +44,9 @@ void Test::init()
 
 	bool work = true;
 	Menu menuTest(getQuestions());
-	auto future = std::async(timeInit, 7);
+	auto future = std::async(timeInit, this->timeDurSec);
 	auto start = std::chrono::system_clock::now();
-	auto end = start + std::chrono::seconds(7);
+	auto end = start + std::chrono::seconds(this->timeDurSec);
 	auto nowTime = std::chrono::system_clock::now();
 	int counter = 0;
 	int keyTest = 0;
@@ -124,7 +124,16 @@ void Test::init()
 	}
 }
 
-
+void Test::createTest()
+{
+	Menu m;
+	m.drawMessageFrame("Enter test's name:");
+	std::string newTestName;
+	std::getline(std::cin, newTestName);
+	newTestName += ".txt";
+	this->testName = newTestName;
+	addQuestion();
+}
 
 void Test::setTime(int seconds)
 {
@@ -413,10 +422,11 @@ void timeInit(int seconds)
 	std::cout << "Times up";
 }
 
-void Test::writeTestFile(std::string name)
+void Test::writeTestFile()
 {
 	fs::path path = this->homePath;
 	//fs::current_path(path);
+	std::string name = this->testName;
 	path /= name;
 	std::ofstream ofs;
 	ofs.open(name, std::ios::out);
@@ -498,4 +508,14 @@ void Test::readTestFile(std::string name)
 		std::cout << "Unable to open file" << std::endl;
 	}
 
+}
+
+std::string Test::getTestName()
+{
+	return this->testName;
+}
+
+void Test::setTestName(std::string name)
+{
+	this->testName = name;
 }

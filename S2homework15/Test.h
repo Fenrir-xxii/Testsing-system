@@ -38,7 +38,7 @@ private:
 	int timeDurSec;
 	fs::path homePath = fs::current_path().string() + "\\Tests";
 	std::string delimiter = "-|-";
-	//std::string testName;
+	std::string testName = "test.txt";
 public:
 	Test() {}
 	Test(std::vector<Question> questions)
@@ -46,12 +46,15 @@ public:
 		this->questions = questions;
 	}
 	void init();
+	void createTest();
 	void setTime(int seconds);
 	double getScore(std::vector<Answer> results);
 	void addQuestion();
 	Question& getQuestion(int idx);
 	std::vector<Question> getQuestions();
 	void readTestFile(std::string name);
-	void writeTestFile(std::string name);
+	void writeTestFile();
+	std::string getTestName();
+	void setTestName(std::string name);
 	//void timeInit(int seconds);
 };
