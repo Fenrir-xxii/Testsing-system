@@ -56,5 +56,6 @@ public:
 	void writeTestFile();
 	std::string getTestName();
 	void setTestName(std::string name);
+	void clearArea(int x, int y);
 	//void timeInit(int seconds);
 };

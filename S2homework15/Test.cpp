@@ -41,7 +41,7 @@ void Test::init()
 		}
 		Sleep(100);
 	}
-
+	system("cls");
 	bool work = true;
 	Menu menuTest(getQuestions());
 	auto future = std::async(timeInit, this->timeDurSec);
@@ -54,7 +54,7 @@ void Test::init()
 	double result = 0;
 	bool answered = false;
 	std::vector<Answer> studentAnswers;
-	system("cls");
+	//system("cls");
 
 	while (work)
 	{
@@ -64,7 +64,8 @@ void Test::init()
 			selection = -1;
 			for (int counter = 0; counter < questions.size(); counter++)
 			{
-				system("cls");
+				//system("cls");
+				clearArea(60, 11);
 				/*if (counter == questions.size() - 1)
 					work = false;*/
 				menuTest.setActiveOption(0);
@@ -96,7 +97,7 @@ void Test::init()
 					case ENTER:
 						num = menuTest.getSelectedOption();
 						studentAnswers.push_back(questions[counter].answers[num]);
-						system("cls");
+						//system("cls");
 						answered = true;
 						break;
 					default:
@@ -402,9 +403,17 @@ void timeInit(int seconds)
 
 	for (int i = 0; i < seconds + 1; ++i)
 	{
-		SetCursorPosition(0, 10);
-		std::cout << "Time until end: " << (seconds - i) << '\n';
+		SetCursorPosition(0, 12);
+		std::cout << "                    ";
+		SetCursorPosition(0, 12);
+		std::cout << "Time until end: ";
+		if ((seconds - i) <= 5)
+		{
+			SetColor(ConsoleColor::RED_FADE, ConsoleColor::BLACK);
+		}
+		std::cout << (seconds - i) << '\n';
 		std::this_thread::sleep_for(std::chrono::seconds(1));
+		SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 	}
 
 
@@ -418,7 +427,7 @@ void timeInit(int seconds)
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
 	//system("cls");
-	SetCursorPosition(0, 11);
+	SetCursorPosition(0, 13);
 	std::cout << "Times up";
 }
 
@@ -442,6 +451,7 @@ void Test::writeTestFile()
 		}
 		ofs << this->delimiter << std::endl;
 	}
+	ofs << "TestDuration:" << this->timeDurSec << std::endl;
 	ofs.close();
 
 }
@@ -451,9 +461,10 @@ void Test::readTestFile(std::string name)
 	fs::path path = this->homePath;
 	//fs::current_path(path);
 	path /= name;
-	//std::string divider = "-|-";
+	std::string timeDuration = "TestDuration:";
 	std::string text;
 	std::ifstream ifs(path);
+	bool foundDurationTimeLine = false;
 
 	if (ifs.is_open())
 	{
@@ -465,6 +476,12 @@ void Test::readTestFile(std::string name)
 			Answer a;
 			int counter = 0;
 			bool hasAnswerValidation = false;
+			if (text.substr(0, 13) == timeDuration)
+			{
+				this->timeDurSec = stoi(text.substr(13));
+				foundDurationTimeLine = true;
+			}
+
 			while ((pos = text.find(this->delimiter)) != std::string::npos)
 			{
 				data = text.substr(0, pos);
@@ -499,7 +516,10 @@ void Test::readTestFile(std::string name)
 				text.erase(0, pos + this->delimiter.length());
 				counter++;
 			}
-			this->questions.push_back(q);
+			if (!foundDurationTimeLine)  // last row (line) is Duration Time not a Question
+			{
+				this->questions.push_back(q);
+			}
 		}
 		ifs.close();
 	}
@@ -507,7 +527,7 @@ void Test::readTestFile(std::string name)
 	{
 		std::cout << "Unable to open file" << std::endl;
 	}
-
+	this->testName = name;
 }
 
 std::string Test::getTestName()
@@ -518,4 +538,16 @@ std::string Test::getTestName()
 void Test::setTestName(std::string name)
 {
 	this->testName = name;
+}
+
+void Test::clearArea(int x, int y)
+{
+	for (int i = 0; i < y; i++)
+	{
+		for (int j = 0; j < x; j++)
+		{
+			SetCursorPosition(j, i);
+			std::cout << " ";
+		}
+	}
 }

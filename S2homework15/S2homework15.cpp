@@ -205,20 +205,20 @@ void ShowConsoleCursor(bool showFlag)
 //}
 
 
-int main()
+int main2()
 {
     ShowConsoleCursor(false);
     std::vector<Question> questions;
-   /* Question q1;
-    q1.text = "Question1";
+    /*Question q1;
+    q1.text = "Q1";
     Answer a1;
-    a1.text = "Answer1-1";
+    a1.text = "A1.1";
     a1.correct = false;
     Answer a2;
-    a2.text = "Answer2-1";
+    a2.text = "A2.1";
     a2.correct = true;
     Answer a3;
-    a3.text = "Answer3-1";
+    a3.text = "A3.1";
     a3.correct = false;
     std::vector<Answer> answers;
     answers.push_back(a1);
@@ -228,15 +228,15 @@ int main()
     questions.push_back(q1);
 
     Question q2;
-    q2.text = "Question2";
+    q2.text = "Q2";
     Answer a11;
-    a11.text = "Answer1-2";
+    a11.text = "A1.2";
     a11.correct = false;
     Answer a21;
-    a21.text = "Answer2-2";
+    a21.text = "A2.2";
     a21.correct = false;
     Answer a31;
-    a31.text = "Answer3-2";
+    a31.text = "A3.2";
     a31.correct = true;
     std::vector<Answer> answers2;
     answers2.push_back(a11);
@@ -246,15 +246,15 @@ int main()
     questions.push_back(q2);
 
     Question q3;
-    q3.text = "Question3";
+    q3.text = "Q3";
     Answer a12;
-    a12.text = "Answer1-3";
+    a12.text = "A3.3";
     a12.correct = true;
     Answer a22;
-    a22.text = "Answer2-3";
+    a22.text = "A3.2";
     a22.correct = false;
     Answer a32;
-    a32.text = "Answer3-3";
+    a32.text = "A3.3";
     a32.correct = false;
     std::vector<Answer> answers3;
     answers3.push_back(a12);
@@ -263,13 +263,14 @@ int main()
     q3.answers = answers3;
     questions.push_back(q3);*/
 
-    Test test(questions);
+    //Test test(questions);
+    Test test;
     //test.init();
-
-
-    //test.writeTestFile("test1.txt");
-    test.readTestFile("Basic C++ Test.txt");
-    test.setTime(150);
+    //test.setTestName("NEW_TEST.txt");
+    //test.setTime(45);
+    //test.writeTestFile();
+    test.readTestFile("NEW_TEST.txt");
+    //test.setTime(150);
     test.init();
 
     //test.addQuestion();
@@ -277,7 +278,7 @@ int main()
 }
 
 
-int main2()
+int main()
 {
     ShowConsoleCursor(false);
     ClassRoom classRoom;

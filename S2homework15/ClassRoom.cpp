@@ -121,6 +121,8 @@ void ClassRoom::studentLogIn()
      std::string login;
      std::string password;
      std::getline(std::cin, login);
+     int key = 0;
+     int selection = 0;
      if (!isLoginUnique(login))
      {
          Student student = this->dataBase.getStudent(login);
@@ -134,6 +136,40 @@ void ClassRoom::studentLogIn()
              {
                  testNames.push_back(tests[i].getTestName());
              }
+             Menu subMenu(testNames);
+             system("cls");
+
+             while (key != ESC)
+             {
+                 subMenu.drawFrame();
+                 subMenu.drawOptions();
+                 key = getKey();
+
+                 switch (key)
+                 {
+                 case UP_ARROW:
+                     subMenu.up();
+                     break;
+                 case DOWN_ARROW:
+                     subMenu.down();
+                     break;
+                 case ENTER:
+                     selection = subMenu.getSelectedOption();
+                     system("cls");
+                     tests[selection].init();
+                     break;
+                 default:
+                     break;
+                 }
+
+
+             }
+         }
+         else
+         {
+             menu.drawMessageFrame("Wrong password");
+             system("pause");
+             system("cls");
          }
      }
      else
