@@ -157,6 +157,7 @@ void ClassRoom::studentLogIn()
                      selection = subMenu.getSelectedOption();
                      system("cls");
                      tests[selection].init();
+                     system("cls");
                      break;
                  default:
                      break;
@@ -230,6 +231,7 @@ void ClassRoom::showMenu()
             {
                 std::vector<std::string> subMenuOptions({ "Log in", "Register", "Go back" });
                 Menu subMenu(subMenuOptions);
+                system("cls");
                 subMenu.drawFrame();
                 subMenu.drawOptions();
                 int key2 = -1;
@@ -275,6 +277,47 @@ void ClassRoom::showMenu()
             else if (selection == MAIN_MENU::TEACHER)
             {
                 //TO-DO
+                std::vector<std::string> subMenuOptions({ "Create Test", "Go back" });
+                Menu subMenu(subMenuOptions);
+                system("cls");
+                subMenu.drawFrame();
+                subMenu.drawOptions();
+                int key2 = -1;
+                selection = -1;
+
+                while (key2 != ESC)
+                {
+                    key2 = getKey();
+                    subMenu.drawFrame();
+                    subMenu.drawOptions();
+
+                    switch (key2)
+                    {
+                    case UP_ARROW:
+                        subMenu.up();
+                        break;
+                    case DOWN_ARROW:
+                        subMenu.down();
+                        break;
+                    case ENTER:
+                        selection = subMenu.getSelectedOption();
+                        if (selection == TEACHER_MENU::CREATE_TEST)
+                        {
+                            Test test;
+                            test.createTest();
+                            tests.push_back(test);
+                            system("cls");
+                        }
+                        else if (selection == TEACHER_MENU::RETURN_BACK)
+                        {
+                            key2 = ESC;
+                            system("cls");
+                        }
+                        break;
+                    default:
+                        break;
+                    }
+                }
             }
             else if (selection == MAIN_MENU::EXIT)
             {

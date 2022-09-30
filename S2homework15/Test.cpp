@@ -1,8 +1,43 @@
 #include "Test.h"
 
-enum TestMenuOptions { START_TEST, EXIT };
+//enum TestMenuOptions { START_TEST, EXIT };
 
-void timeInit(int seconds);
+//void timeInit(int seconds);
+void timeInit(int seconds)
+{
+	auto start = std::chrono::system_clock::now();
+	auto end = start + std::chrono::seconds(seconds);
+
+	for (int i = 0; i < seconds + 1; ++i)
+	{
+		SetCursorPosition(0, 12);
+		std::cout << "                    ";
+		SetCursorPosition(0, 12);
+		std::cout << "Time until end: ";
+		if ((seconds - i) <= 5)
+		{
+			SetColor(ConsoleColor::RED_FADE, ConsoleColor::BLACK);
+		}
+		std::cout << (seconds - i) << '\n';
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+		SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
+	}
+
+
+	while (true)
+	{
+		//std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		if (std::chrono::system_clock::now() > end)
+		{
+			break;
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+	//system("cls");
+	SetCursorPosition(0, 13);
+	std::cout << "Times up";
+	SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
+}
 
 void Test::init()
 {
@@ -107,6 +142,7 @@ void Test::init()
 				}
 			}
 			system("cls");
+			SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 			result = getScore(studentAnswers);
 			std::cout << result << "%" << std::endl;
 			nowTime = std::chrono::system_clock::now();
@@ -114,9 +150,10 @@ void Test::init()
 			SetCursorPosition(0, 1);
 			std::cout << "Time: " << diff.count() << " s." << std::endl;
 			std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+			work = false;
 			//std::cout << "EXIT";
 			break;
-		case TestMenuOptions::EXIT:
+		case TestMenuOptions::EXIT_TEST:
 			work = false;
 			break;
 		default:
@@ -133,7 +170,82 @@ void Test::createTest()
 	std::getline(std::cin, newTestName);
 	newTestName += ".txt";
 	this->testName = newTestName;
-	addQuestion();
+	bool enoughtQuestions = false;
+	std::vector <std::string> v({"Yes", "No"});
+	Menu yesNo(v);
+	int key = 0;
+	bool work = true;
+	int num = -1;
+	do
+	{
+		addQuestion();
+		m.drawMessageFrame("Add another question for this test?");
+		yesNo.drawFrame(1, 1);
+		yesNo.drawOptions(3, 3);
+		work = true;
+		do
+		{
+			key = getKey();
+			switch (key)
+			{
+			case UP_ARROW:
+				yesNo.up();
+				yesNo.drawOptions(3, 3);
+				break;
+			case DOWN_ARROW:
+				yesNo.down();
+				yesNo.drawOptions(3, 3);
+				break;
+			case ENTER:
+				num = yesNo.getSelectedOption();
+				if (num == YES_NO_MENU::NO) 
+				{
+					enoughtQuestions = true;
+				}
+				system("cls");
+				work = false;
+				break;
+			default:
+				break;
+			}
+
+		} while (work);
+
+	} while (!enoughtQuestions);
+	m.drawMessageFrame("Enter test's duration (in seconds):");
+	int seconds = 0;
+	do
+	{
+		try
+		{
+			while (true)
+			{
+				std::cin >> seconds;
+				if (std::cin.fail()) {
+					std::cin.clear();
+					std::cin.ignore(256, '\n');
+					system("cls");
+					throw "Error: wrong input type. Input must be number (integer)\nTry again\n";
+				}
+				if (seconds <= 0) {
+					system("cls");
+					std::cout << "Number is less than or equal to 0\nTry again\n" << std::endl;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		catch (const char* error)
+		{
+			std::cout << error << std::endl;
+		}
+	} while (seconds <= 0);
+	std::cin.clear();
+	std::cin.ignore(256, '\n');
+	setTime(seconds);
+	writeTestFile();
 }
 
 void Test::setTime(int seconds)
@@ -199,7 +311,7 @@ void Test::addQuestion()
 					break;
 				case ENTER:
 					num = yesNo.getSelectedOption();
-					if (num != 0) // 0 - 'Yes', 1 - 'No'
+					if (num == YES_NO_MENU::NO) 
 					{
 						enoughAnswers = true;
 					}
@@ -260,7 +372,7 @@ void Test::addQuestion()
 		}
 
 	} while (work);
-
+	this->questions.push_back(newQuestion);
 
 	system("cls");
 }
@@ -396,45 +508,48 @@ std::vector<Question> Test::getQuestions()
 	return questions;
 }
 
-void timeInit(int seconds)
-{
-	auto start = std::chrono::system_clock::now();
-	auto end = start + std::chrono::seconds(seconds);
-
-	for (int i = 0; i < seconds + 1; ++i)
-	{
-		SetCursorPosition(0, 12);
-		std::cout << "                    ";
-		SetCursorPosition(0, 12);
-		std::cout << "Time until end: ";
-		if ((seconds - i) <= 5)
-		{
-			SetColor(ConsoleColor::RED_FADE, ConsoleColor::BLACK);
-		}
-		std::cout << (seconds - i) << '\n';
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
-	}
-
-
-	while (true)
-	{
-		//std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		if (std::chrono::system_clock::now() > end)
-		{
-			break;
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-	}
-	//system("cls");
-	SetCursorPosition(0, 13);
-	std::cout << "Times up";
-}
+//void timeInit(int seconds)
+//{
+//	auto start = std::chrono::system_clock::now();
+//	auto end = start + std::chrono::seconds(seconds);
+//
+//	for (int i = 0; i < seconds + 1; ++i)
+//	{
+//		SetCursorPosition(0, 12);
+//		std::cout << "                    ";
+//		SetCursorPosition(0, 12);
+//		std::cout << "Time until end: ";
+//		if ((seconds - i) <= 5)
+//		{
+//			SetColor(ConsoleColor::RED_FADE, ConsoleColor::BLACK);
+//		}
+//		std::cout << (seconds - i) << '\n';
+//		std::this_thread::sleep_for(std::chrono::seconds(1));
+//		SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
+//	}
+//
+//
+//	while (true)
+//	{
+//		//std::this_thread::sleep_for(std::chrono::milliseconds(100));
+//		if (std::chrono::system_clock::now() > end)
+//		{
+//			break;
+//		}
+//		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+//	}
+//	//system("cls");
+//	SetCursorPosition(0, 13);
+//	std::cout << "Times up";
+//	SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
+//}
 
 void Test::writeTestFile()
 {
 	fs::path path = this->homePath;
 	//fs::current_path(path);
+	fs::path mainPath = fs::current_path();
+	fs::current_path(path);
 	std::string name = this->testName;
 	path /= name;
 	std::ofstream ofs;
@@ -453,7 +568,7 @@ void Test::writeTestFile()
 	}
 	ofs << "TestDuration:" << this->timeDurSec << std::endl;
 	ofs.close();
-
+	fs::current_path(mainPath);
 }
 
 void Test::readTestFile(std::string name)

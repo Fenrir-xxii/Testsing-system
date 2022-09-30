@@ -9,6 +9,7 @@
 #include <fstream>
 #include "menu.h"
 #include "struct.h"
+#include "EnumMenu.h"
 
 namespace fs = std::filesystem;
 

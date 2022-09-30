@@ -19,10 +19,10 @@ void DataBase::loadTests()
             testsNames.push_back(name);
         }
     }
-    Test newTest;
 
     for (int i = 0; i < testsNames.size(); i++)
     {
+        Test newTest;
         newTest.readTestFile(testsNames[i]);
         this->tests.push_back(newTest);
     }

@@ -1,0 +1,5 @@
+I <...> tea.-|-drink not-|-false-|-don't drink-|-true-|-not drink-|-false-|-
+She <...> two brothers.-|-have-|-false-|-haves-|-false-|-has-|-true-|-
+Tom <...> work until 10 today.-|-doesn't start-|-true-|-do not start-|-false-|-doesn't starts-|-false-|-
+<...> an instrument?-|-You do play-|-false-|-You play-|-false-|-Do you play-|-true-|-
+TestDuration:45

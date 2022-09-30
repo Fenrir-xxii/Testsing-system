@@ -1,0 +1,7 @@
+In which country would you find the Eiffel Tower?-|-Belgium-|-false-|-France-|-true-|-Andorra-|-false-|-
+What continent is India on?-|-Africa-|-false-|-Europe-|-false-|-Asia-|-true-|-South America-|-false-|-
+Which of these countries is in Europe?-|-Austria-|-true-|-Japan-|-false-|-Canada-|-false-|-Egypt-|-false-|-
+Which of these countries is NOT in Europe?-|-Andorra-|-false-|-Denmark-|-false-|-Israel-|-true-|-Malta-|-false-|-
+Canada has more lakes than any other country in the world.-|-True-|-true-|-False-|-false-|-
+Dubai is in Qatar.-|-True-|-false-|-False-|-true-|-
+TestDuration:30

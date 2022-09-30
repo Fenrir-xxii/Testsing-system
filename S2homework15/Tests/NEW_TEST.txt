@@ -1,4 +1,0 @@
-Q1-|-A1.1-|-false-|-A2.1-|-true-|-A3.1-|-false-|-
-Q2-|-A1.2-|-false-|-A2.2-|-false-|-A3.2-|-true-|-
-Q3-|-A3.3-|-true-|-A3.2-|-false-|-A3.3-|-false-|-
-TestDuration:45
