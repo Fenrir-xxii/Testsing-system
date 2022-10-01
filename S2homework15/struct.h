@@ -14,3 +14,9 @@ struct Question
 	std::string text;
 	std::vector<Answer> answers;
 };
+
+struct Credentials
+{
+	std::string login;
+	std::string password;
+};

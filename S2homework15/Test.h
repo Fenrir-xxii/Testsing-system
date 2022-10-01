@@ -10,27 +10,9 @@
 #include "menu.h"
 #include "struct.h"
 #include "EnumMenu.h"
+#include "FileCryptor.h"
 
 namespace fs = std::filesystem;
-
-//struct Answer
-//{
-//	std::string text;
-//	bool correct;
-//};
-//
-//struct Question
-//{
-//	std::string text;
-//	std::vector<Answer> answers;
-//};
-
-//struct Time
-//{
-//	short hour;
-//	short minute;
-//	short second;
-//};
 
 class Test
 {
@@ -40,6 +22,7 @@ private:
 	fs::path homePath = fs::current_path().string() + "\\Tests";
 	std::string delimiter = "-|-";
 	std::string testName = "test.txt";
+	FileCryptor cryptor;
 public:
 	Test() {}
 	Test(std::vector<Question> questions)
@@ -58,5 +41,5 @@ public:
 	std::string getTestName();
 	void setTestName(std::string name);
 	void clearArea(int x, int y);
-	//void timeInit(int seconds);
+
 };

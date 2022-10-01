@@ -29,8 +29,6 @@ public:
 
 	void drawQuestion(Question q);
 
-	//void drawQuestion(std::string question);
-
 	void down();
 
 	void up();

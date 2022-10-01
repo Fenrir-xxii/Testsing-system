@@ -1,20 +1,14 @@
 #pragma once
 #include <string>
 #include <filesystem>
+#include "struct.h"
 
 namespace fs = std::filesystem;
-
-struct Credentials
-{
-	std::string login;
-	std::string password;
-};
 
 class Student
 {
 private:
 	Credentials credentials;
-	//fs::path homePath = fs::current_path().string() + "\\Users";
 public:
 
 	Student() {};
@@ -32,6 +26,5 @@ public:
 	void setLogin(std::string login);
 	std::string getLogin();
 	bool passValidation(std::string password);
-	//void createHomeDirectory();
 
 };

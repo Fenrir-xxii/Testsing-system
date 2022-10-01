@@ -1,12 +1,5 @@
 #include "DataBase.h"
 
-
-//void DataBase::init()
-//{
-//    loadTests();
-//    loadUsers();
-//}
-
 void DataBase::loadTests()
 {
     std::vector <std::string> testsNames;
@@ -26,12 +19,6 @@ void DataBase::loadTests()
         newTest.readTestFile(testsNames[i]);
         this->tests.push_back(newTest);
     }
-
-    /*for (int i = 0; i < testsNames.size(); i++)
-    {
-        std::cout << "Test name: " << this->tests[i].getQuestion(i).text << std::endl;
-    }*/
-
 }
 
 void DataBase::loadUsers()
@@ -39,6 +26,7 @@ void DataBase::loadUsers()
     std::string name;
     Student student;
     std::string text;
+    this->cryptor.decrypt(this->studentsCredentialsPath);
     std::ifstream ifs(this->studentsCredentialsPath);
     int counter = 0;
 
@@ -66,17 +54,12 @@ void DataBase::loadUsers()
             this->students.push_back(student);
 		}
 		ifs.close();
+        this->cryptor.crypt(this->studentsCredentialsPath);
 	}
 	else
 	{
 		std::cout << "Unable to open file" << std::endl;
 	}
-
-    /*for (int i = 0; i < students.size(); i++)
-    {
-        std::cout << "Student name: " << this->students[i].getLogin() << std::endl;
-    }*/
-
 }
 
 std::vector <std::string> DataBase::getLogins()
@@ -97,7 +80,6 @@ std::vector <Test> DataBase::getTests()
 
 Student& DataBase::getStudent(std::string login)
 {
-    //Student student;
     for (int i = 0; i < students.size(); i++)
     {
         if (login == students[i].getLogin())
@@ -105,4 +87,10 @@ Student& DataBase::getStudent(std::string login)
             return students[i];
         }
     }
+}
+
+void DataBase::refresh()
+{
+    loadTests();
+    loadUsers();
 }

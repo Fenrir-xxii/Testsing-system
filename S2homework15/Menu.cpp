@@ -85,7 +85,8 @@ void Menu::drawFrame(std::string header)
 	{
 		for (size_t x = 0; x < maxWidth; x++)
 		{
-			if (x == 0 || x == maxWidth-1 || y == 0 || y == height - 1) {
+			if (x == 0 || x == maxWidth-1 || y == 0 || y == height - 1) 
+			{
 				SetCursorPosition(x, y);
 				SetColor(ConsoleColor::WHITE, ConsoleColor::GREEN_FADE);
 				std::cout << ' ';
@@ -98,17 +99,20 @@ void Menu::drawFrame(std::string header)
 	SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 }
 
-void Menu::drawOptions() {
+void Menu::drawOptions() 
+{
 	int startX = 3;
 	int startY = 2;
 	int max = getMaxItemSize();
 	for (size_t i = 0; i < options.size(); i++)
 	{
 		SetCursorPosition(startX, startY + i);
-		if (activeOption == i) {
+		if (activeOption == i) 
+		{
 			SetColor(RED, WHITE);
 		}
-		else {
+		else 
+		{
 			SetColor(WHITE, BLACK);
 		}
 		auto item = options[i];
@@ -118,17 +122,20 @@ void Menu::drawOptions() {
 	SetColor(WHITE, BLACK);
 }
 
-void Menu::drawOptions(int cX, int cY) {
+void Menu::drawOptions(int cX, int cY) 
+{
 	int startX = cX;
 	int startY = cY;
 	int max = getMaxItemSize();
 	for (size_t i = 0; i < options.size(); i++)
 	{
 		SetCursorPosition(startX, startY + i);
-		if (activeOption == i) {
+		if (activeOption == i) 
+		{
 			SetColor(RED, WHITE);
 		}
-		else {
+		else 
+		{
 			SetColor(WHITE, BLACK);
 		}
 		auto item = options[i];
@@ -138,53 +145,8 @@ void Menu::drawOptions(int cX, int cY) {
 	SetColor(WHITE, BLACK);
 }
 
-//void Menu::drawQuestion(Question q)
-//{
-//	std::string header = q.text;
-//	size_t headerSize = header.size();
-//	size_t width = getFrameWidth();
-//	size_t maxWidth = (width > headerSize) ? width : headerSize;
-//	size_t height = getFrameHeight();
-//
-//	for (size_t y = 0; y < height; y++)
-//	{
-//		for (size_t x = 0; x < width; x++)
-//		{
-//			if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
-//				SetCursorPosition(x, y);
-//				SetColor(ConsoleColor::WHITE, ConsoleColor::YELLOW_FADE);
-//				std::cout << ' ';
-//			}
-//		}
-//	}
-//	SetCursorPosition(1, 0);
-//	SetColor(ConsoleColor::BLUE, ConsoleColor::YELLOW_FADE);
-//	std::cout << header;
-//	SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
-//
-//	int startX = 3;
-//	int startY = 2;
-//	int max = getMaxItemSize();
-//	for (size_t i = 0; i < q.answers.size(); i++)
-//	{
-//		SetCursorPosition(startX, startY + i);
-//		if (activeOption == i) {
-//			SetColor(RED, WHITE);
-//		}
-//		else {
-//			SetColor(WHITE, BLACK);
-//		}
-//		auto item = q.answers[i].text;
-//		item.append(std::string(max - item.size(), ' '));
-//		std::cout << item;
-//	}
-//	SetColor(WHITE, BLACK);
-//}
-
 void Menu::drawQuestion(Question q)
 {
-	/*std::string header = q.text;
-	drawFrame(header);*/
 	std::vector<std::string> temp;
 	for (int i = 0; i < q.answers.size(); i++)
 	{
@@ -193,19 +155,20 @@ void Menu::drawQuestion(Question q)
 	options = temp;
 	std::string header = q.text;
 	drawFrame(header);
-	//int headerWidth = header.size();
 
 	int startX = 3;
 	int startY = 2;
 	int max = getMaxItemSize();
-	//max = max > headerWidth ? max : headerWidth;
+	
 	for (size_t i = 0; i < options.size(); i++)
 	{
 		SetCursorPosition(startX, startY + i);
-		if (activeOption == i) {
+		if (activeOption == i) 
+		{
 			SetColor(RED, WHITE);
 		}
-		else {
+		else 
+		{
 			SetColor(WHITE, BLACK);
 		}
 		auto item = options[i];
@@ -215,42 +178,17 @@ void Menu::drawQuestion(Question q)
 	SetColor(WHITE, BLACK);
 }
 
-//void Menu::drawQuestion(std::string question)
-//{
-//	int startX = 3;
-//	int startY = 2;
-//	int max = getMaxItemSize();
-//
-//	SetCursorPosition(0, 0);
-//	std::cout << question;
-//
-//	for (size_t i = 0; i < options.size(); i++)
-//	{
-//		SetCursorPosition(startX, startY + i);
-//		if (activeOption == i) {
-//			SetColor(RED, WHITE);
-//		}
-//		else {
-//			SetColor(WHITE, BLACK);
-//		}
-//		auto item = options[i];
-//		item.append(std::string(max - item.size(), ' '));
-//		std::cout << item;
-//	}
-//	SetColor(WHITE, BLACK);
-//}
-
 void Menu::drawMessageFrame(std::string message)
 {
 	system("cls");
 	SetCursorPosition(0, 0);
-	//size_t width = message.length() + 6;
 
 	for (size_t coordY = 0; coordY < 10; coordY++)
 	{
 		for (size_t coordX = 0; coordX < 50; coordX++)
 		{
-			if (coordX == 0 || coordX == 50 - 1 || coordY == 0 || coordY == 10 - 1) {
+			if (coordX == 0 || coordX == 50 - 1 || coordY == 0 || coordY == 10 - 1) 
+			{
 				SetCursorPosition(coordX, coordY);
 				SetColor(ConsoleColor::WHITE, ConsoleColor::BLUE_FADE);
 				std::cout << ' ';
@@ -264,21 +202,26 @@ void Menu::drawMessageFrame(std::string message)
 
 }
 
-void Menu::down() {
+void Menu::down() 
+{
 	activeOption++;
-	if (activeOption >= options.size()) {
+	if (activeOption >= options.size()) 
+	{
 		activeOption = 0;
 	}
 }
 
-void Menu::up() {
+void Menu::up() 
+{
 	activeOption--;
-	if (activeOption < 0) {
+	if (activeOption < 0) 
+	{
 		activeOption = options.size() - 1;
 	}
 }
 
-int Menu::getSelectedOption() const {
+int Menu::getSelectedOption() const 
+{
 	return activeOption;
 }
 

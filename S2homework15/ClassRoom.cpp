@@ -2,53 +2,12 @@
 
 void ClassRoom::loadTests()
 {
-    //this->dataBase.init();
     this->tests = this->dataBase.getTests();
-    
-    /*std::vector <std::string> testsNames;
-    std::string name;
-    for (auto const& dirEntry : fs::directory_iterator{ this->testsPath })
-    {
-        if (dirEntry.is_regular_file())
-        {
-            name = dirEntry.path().filename().string();
-            testsNames.push_back(name);
-        }
-    }
-    Test newTest;
-
-    for (int i = 0; i < testsNames.size(); i++)
-    {
-        newTest.readTestFile(testsNames[i]);
-        this->tests.push_back(newTest);
-    }*/
-
-    /*for (int i = 0; i < tests.size(); i++)
-    {
-        std::cout << "Test name: " << this->tests[i].getQuestion(i).text << std::endl;
-    }*/
-
 }
 
 void ClassRoom::loadUsersLogins()
 {
-    //this->dataBase.init();
     this->students = this->dataBase.getLogins();
-    
-    /*std::string name;
-    for (auto const& dirEntry : fs::directory_iterator{ this->studentsPath })
-    {
-        if (dirEntry.is_directory())
-        {
-            name = dirEntry.path().filename().string();
-            students.push_back(name);
-        }
-    }*/
-
-    /*for (int i = 0; i < students.size(); i++)
-    {
-        std::cout << "Student name: " << students[i] << std::endl;
-    }*/
 }
 
 void ClassRoom::init()
@@ -69,11 +28,14 @@ void ClassRoom::studentRegistration(std::string login, std::string password)
         fs::current_path(path);
         path /= name;
         std::ofstream ofs;
+        this->cryptor.decrypt(path);
         ofs.open(name, std::ios::app);
 
         ofs << login << "-|-" << password << "-|-" << std::endl;
 
         ofs.close();
+        this->cryptor.crypt(path);
+        this->dataBase.refresh();
     }
 }
 
@@ -115,7 +77,6 @@ void ClassRoom::studentRegistrationMenu()
 
 void ClassRoom::studentLogIn()
 {
-     //menu log-in
      Menu menu;
      menu.drawMessageFrame("Enter your login");
      std::string login;
@@ -127,7 +88,9 @@ void ClassRoom::studentLogIn()
      {
          Student student = this->dataBase.getStudent(login);
          menu.drawMessageFrame("Enter your password");
+         SetColor(ConsoleColor::BLACK, ConsoleColor::BLACK);
          std::getline(std::cin, password);
+         SetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
          if (student.passValidation(password))
          {
              // show tests
@@ -156,14 +119,15 @@ void ClassRoom::studentLogIn()
                  case ENTER:
                      selection = subMenu.getSelectedOption();
                      system("cls");
-                     tests[selection].init();
+                     tests[selection].init();   // chosen test init
                      system("cls");
                      break;
+                 case ESC:
+                     system("cls");
+                     return;
                  default:
                      break;
                  }
-
-
              }
          }
          else
@@ -175,9 +139,11 @@ void ClassRoom::studentLogIn()
      }
      else
      {
-         std::cout << "Such login is not registered";
+         system("cls");
+         std::cout << "Such login is not registered\n";
+         system("pause");
+         system("cls");
      }
-    
 }
 
 bool ClassRoom::isLoginUnique(std::string login)
@@ -247,17 +213,16 @@ void ClassRoom::showMenu()
                     {
                     case UP_ARROW:
                         subMenu.up();
-                        //subMenu.drawOptions();
                         break;
                     case DOWN_ARROW:
                         subMenu.down();
-                        //subMenu.drawOptions();
                         break;
                     case ENTER:
                         selection = subMenu.getSelectedOption();
                         if (selection == STUDENT_MENU::LOGIN)
                         {
                             studentLogIn();
+                            //system("cls");
                         }
                         else if (selection == STUDENT_MENU::REGISTER)
                         {
@@ -269,6 +234,9 @@ void ClassRoom::showMenu()
                             system("cls");
                         }
                         break;
+                    case ESC:
+                        system("cls");
+                        break;
                     default:
                         break;
                     }
@@ -276,7 +244,6 @@ void ClassRoom::showMenu()
             }
             else if (selection == MAIN_MENU::TEACHER)
             {
-                //TO-DO
                 std::vector<std::string> subMenuOptions({ "Create Test", "Go back" });
                 Menu subMenu(subMenuOptions);
                 system("cls");

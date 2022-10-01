@@ -1,5 +1,1 @@
-How many bytes are used to store Boolean?-|-1 Bit-|-false-|-1 Byte-|-true-|-2 Bytes-|-false-|-
-What range of values can store a signed Integer type?-|-0 to 4 294 967 295-|-false-|--32 768 to 32 767-|-false-|--2 147 483 648 to 2 147 483 647-|-true-|-
-What operator has highest priority (precedence)?-|-a-- (Postfix decrement)-|-true-|-= (Direct assignment)-|-false-|-++a (Prefix increment)-|-false-|-
-What is the return type of main function?-|-bool-|-false-|-int-|-true-|-float-|-false-|-
-TestDuration:20
+\ƒ‹4u‚4vˆy‡4u†y4‰‡yx4ˆƒ4‡ˆƒ†y4Vƒƒ€yu‚SAAE4V}ˆAAzu€‡yAAE4VˆyAAˆ†‰yAAF4Vˆy‡AAzu€‡yAAk|uˆ4†u‚{y4ƒz4Šu€‰y‡4wu‚4‡ˆƒ†y4u4‡}{‚yx4]‚ˆy{y†4ˆ„ySAAD4ˆƒ4H4FMH4MJK4FMIAAzu€‡yAAAGF4KJL4ˆƒ4GF4KJKAAzu€‡yAAAF4EHK4HLG4JHL4ˆƒ4F4EHK4HLG4JHKAAˆ†‰yAAk|uˆ4ƒ„y†uˆƒ†4|u‡4|}{|y‡ˆ4„†}ƒ†}ˆ4<„†ywyxy‚wy=SAAuAA4<dƒ‡ˆz}Œ4xyw†yy‚ˆ=AAˆ†‰yAAQ4<X}†ywˆ4u‡‡}{‚y‚ˆ=AAzu€‡yAA??u4<d†yz}Œ4}‚w†yy‚ˆ=AAzu€‡yAAk|uˆ4}‡4ˆ|y4†yˆ‰†‚4ˆ„y4ƒz4u}‚4z‰‚wˆ}ƒ‚SAAvƒƒ€AAzu€‡yAA}‚ˆAAˆ†‰yAAz€ƒuˆAAzu€‡yAAhy‡ˆX‰†uˆ}ƒ‚NHD

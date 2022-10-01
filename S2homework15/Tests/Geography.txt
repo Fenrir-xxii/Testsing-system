@@ -1,7 +1,1 @@
-In which country would you find the Eiffel Tower?-|-Belgium-|-false-|-France-|-true-|-Andorra-|-false-|-
-What continent is India on?-|-Africa-|-false-|-Europe-|-false-|-Asia-|-true-|-South America-|-false-|-
-Which of these countries is in Europe?-|-Austria-|-true-|-Japan-|-false-|-Canada-|-false-|-Egypt-|-false-|-
-Which of these countries is NOT in Europe?-|-Andorra-|-false-|-Denmark-|-false-|-Israel-|-true-|-Malta-|-false-|-
-Canada has more lakes than any other country in the world.-|-True-|-true-|-False-|-false-|-
-Dubai is in Qatar.-|-True-|-false-|-False-|-true-|-
-TestDuration:30
+]‚4‹|}w|4wƒ‰‚ˆ†4‹ƒ‰€x4ƒ‰4z}‚x4ˆ|y4Y}zzy€4hƒ‹y†SAAVy€{}‰AAzu€‡yAAZ†u‚wyAAˆ†‰yAAU‚xƒ††uAAzu€‡yAAk|uˆ4wƒ‚ˆ}‚y‚ˆ4}‡4]‚x}u4ƒ‚SAAUz†}wuAAzu€‡yAAY‰†ƒ„yAAzu€‡yAAU‡}uAAˆ†‰yAAgƒ‰ˆ|4Uy†}wuAAzu€‡yAAk|}w|4ƒz4ˆ|y‡y4wƒ‰‚ˆ†}y‡4}‡4}‚4Y‰†ƒ„ySAAU‰‡ˆ†}uAAˆ†‰yAA^u„u‚AAzu€‡yAAWu‚uxuAAzu€‡yAAY{„ˆAAzu€‡yAAk|}w|4ƒz4ˆ|y‡y4wƒ‰‚ˆ†}y‡4}‡4bch4}‚4Y‰†ƒ„ySAAU‚xƒ††uAAzu€‡yAAXy‚u†AAzu€‡yAA]‡†uy€AAˆ†‰yAAau€ˆuAAzu€‡yAAWu‚uxu4|u‡4ƒ†y4€uy‡4ˆ|u‚4u‚4ƒˆ|y†4wƒ‰‚ˆ†4}‚4ˆ|y4‹ƒ†€xBAAh†‰yAAˆ†‰yAAZu€‡yAAzu€‡yAAX‰vu}4}‡4}‚4euˆu†BAAh†‰yAAzu€‡yAAZu€‡yAAˆ†‰yAAhy‡ˆX‰†uˆ}ƒ‚NGD

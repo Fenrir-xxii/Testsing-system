@@ -1,5 +1,1 @@
-I <...> tea.-|-drink not-|-false-|-don't drink-|-true-|-not drink-|-false-|-
-She <...> two brothers.-|-have-|-false-|-haves-|-false-|-has-|-true-|-
-Tom <...> work until 10 today.-|-doesn't start-|-true-|-do not start-|-false-|-doesn't starts-|-false-|-
-<...> an instrument?-|-You do play-|-false-|-You play-|-false-|-Do you play-|-true-|-
-TestDuration:45
+]4PBBBR4ˆyuBAAx†}‚4‚ƒˆAAzu€‡yAAxƒ‚;ˆ4x†}‚AAˆ†‰yAA‚ƒˆ4x†}‚AAzu€‡yAAg|y4PBBBR4ˆ‹ƒ4v†ƒˆ|y†‡BAA|uŠyAAzu€‡yAA|uŠy‡AAzu€‡yAA|u‡AAˆ†‰yAAhƒ4PBBBR4‹ƒ†4‰‚ˆ}€4ED4ˆƒxuBAAxƒy‡‚;ˆ4‡ˆu†ˆAAˆ†‰yAAxƒ4‚ƒˆ4‡ˆu†ˆAAzu€‡yAAxƒy‡‚;ˆ4‡ˆu†ˆ‡AAzu€‡yAAPBBBR4u‚4}‚‡ˆ†‰y‚ˆSAAmƒ‰4xƒ4„€uAAzu€‡yAAmƒ‰4„€uAAzu€‡yAAXƒ4ƒ‰4„€uAAˆ†‰yAAhy‡ˆX‰†uˆ}ƒ‚NFI
